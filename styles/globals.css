@@ -1,26 +1,74 @@
-html,
-body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
+@layer base {
   body {
-    color: white;
-    background: black;
+    @apply bg-ai-darkGrey text-white font-montserrat;
+  }
+
+  h1, h2, h3 {
+    @apply font-exo-2;
+  }
+
+  .button {
+    @apply font-montserrat uppercase inline-block;
+  }
+
+  .button--solid, .button--ghost {
+    @apply py-3 px-8 border border-transparent;
+  }
+
+  .button--solid.button--black {
+    @apply bg-black border-black text-white;
+  }
+
+  .button--solid.button--white {
+    @apply bg-white border-white text-black;
+  }
+
+  .button--ghost.button--white {
+    @apply bg-transparent border-white text-white;
+  }
+
+  .button--ghost.button--black {
+    @apply bg-transparent border-black text-black;
+  }
+  
+}
+
+@layer utilities {
+  .text-p {
+    @apply text-lg;
+  }
+
+  .text-h1 {
+    @apply text-[2.625rem];
+  }
+
+  .text-h2 {
+    @apply text-4xl;
+  }
+
+  .text-h3 {
+    @apply text-2xl;
+  }
+
+  .text-h4 {
+    @apply text-lg font-bold font-exo-2;
+  }
+
+  .text-page-title {
+    @apply text-[2.625rem];
+  }
+
+  .text-hero-title {
+    @apply text-[2.625rem];
+  }
+
+  .text-nav {
+    @apply text-lg font-exo-2 uppercase;
   }
 }
+
+.vehicleList .splide__list, .vehicleList .splide__slide { @apply h-full }
