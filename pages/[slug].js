@@ -9,13 +9,11 @@ import { Layout } from '../components/Layout'
 
 const Page = ({pageData, inventoryData, globalData}) => {
   
-    const template      = pageData.template
+    const template      = globalData && pageData.template !== undefined ? pageData.template : false
     const headerObject  = {
       heading: pageData.title,
       image: globalData.pageHeader
     }
-
-    console.log(pageData.header)
 
     if (pageData.header) {
       headerObject.heading  = pageData.header.titleOverride ? pageData.header.titleOverride : headerObject.heading,
@@ -28,9 +26,9 @@ const Page = ({pageData, inventoryData, globalData}) => {
                 
                 <PageHeader heading={headerObject.heading} image={headerObject.image} />
 
-                {template === `inventoryIndex` && <Inventory vehicles={inventoryData} />}
-                {template === `services` && <Services cards={pageData.contentCards} />}
-                {template === `contact` && <Contact content={globalData} />}
+                {template && template === `inventoryIndex` && <Inventory vehicles={inventoryData} />}
+                {template && template === `services` && <Services cards={pageData.contentCards} />}
+                {template && template === `contact` && <Contact content={globalData} />}
 
                 {pageData.footerLinkBoxes &&
                   <LinkBoxes data={pageData.footerLinkBoxes} />

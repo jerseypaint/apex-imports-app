@@ -52,7 +52,7 @@ const Vehicle = ({data, globalData}) => {
     return (
         <Layout data={globalData}>
             <main>
-                <PageHeader image={globalData.vehicleHeader} heading={`${vehicle.year} ${vehicle.make} ${vehicle.model}`} />
+                <PageHeader image={globalData && globalData.vehicleHeader !== undefined ? globalData.vehicleHeader : ``} heading={`${vehicle.year} ${vehicle.make} ${vehicle.model}`} />
 
                 <div className={`mb-12`}>
                     <Splide
