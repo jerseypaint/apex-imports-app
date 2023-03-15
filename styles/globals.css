@@ -28,7 +28,7 @@
   }
 
   .button--ghost.button--white {
-    @apply bg-transparent border-white text-white;
+    @apply bg-transparent border-white text-white relative hover:text-black hover:bg-white transition-all duration-300;
   }
 
   .button--ghost.button--black {

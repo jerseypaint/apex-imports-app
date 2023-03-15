@@ -28,8 +28,8 @@ const Contact = ({content}) => {
                         <div className={`mb-6`}>
                             <p className={`text-h3 font-exo-2 font-bold`}>Contact</p>
                             <p>
-                                <span>CALL: {contact && contact.phone}</span>
-                                <span>EMAIL: {contact && contact.email}</span>
+                                <span className={`block`}>CALL: {contact && contact.phone}</span>
+                                <span className={`block`}>EMAIL: {contact && contact.email}</span>
                             </p>
                         </div>
                         <div className={`mb-6`}>

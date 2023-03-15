@@ -1,10 +1,12 @@
 import Image from "next/image"
 import Link from "next/link"
 import { useState } from "react"
+import { useRouter } from "next/router"
 import { Hamburger } from "./svg"
 
 export const Header = ({logo, nav}) => {
     const [ showNav, setShowNav ] = useState(false)
+    const router = useRouter()
 
     return(
         <header className={`relative bg-black py-4`}>
@@ -32,9 +34,10 @@ export const Header = ({logo, nav}) => {
                                 <nav className={`hidden md:block`}>
                                     <ul className={`md:flex md:-mx-5`}>
                                         {nav.map(item => {
+                                            const isActive = router.asPath === `/${item.page}` ? true : (item.page === null && router.asPath === '/' ? true : false)
                                             return(
                                                 <li className={`font-exo-2 uppercase text-lg mx-5`}>
-                                                    <Link href={`/${item.page === null ? `` : item.page}`}>{item.text}</Link>
+                                                    <Link href={`/${item.page === null ? `` : item.page}`} class={`border-b hover:border-white active:border-white transition-colors duration-300 ${isActive ? `border-white` : `border-transparent`}`}>{item.text}</Link>
                                                 </li>
                                             )
                                         })}

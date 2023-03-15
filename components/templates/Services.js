@@ -1,19 +1,8 @@
 import { PortableText } from "@portabletext/react"
 import { useForm } from "react-hook-form"
-const Card = ({heading, body, list, media}) => {
+import { motion } from "framer-motion"
 
-    return(
-        <div className={`border border-white bg-black border-opacity-40 my-6 p-6 first:mt-0 last:mb-0`}>
-            <div className={`flex justify-between`}>
-                <h3 className={`text-h3`}>{heading}</h3>
-            </div>
-            <div className={`mt-6`}>
-             <PortableText value={body} />
-            </div>
-        </div>
-    )
-}
-
+import Card from "../ContentCard"
 
 const Services = ({cards}) => {
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
@@ -22,19 +11,19 @@ const Services = ({cards}) => {
     return(
         <div className={`py-12`}>
             <div className={`container`}>
-                <div className='md:grid md:grid-cols-3 2xl:grid-cols-4 gap-6'>
-                    <div className={`col-span-2 2xl:col-span-3`}>
+                <div className='lg:grid lg:grid-cols-3 2xl:grid-cols-4 gap-6'>
+                    <div className={`lg:col-span-2 2xl:col-span-3`}>
                         <div>
                             {cards &&
                                 cards.map(card => {
                                     return(
-                                        <Card heading={card.heading} body={card.body} list={card.list} />
+                                        <Card card={card} />
                                     )
                                 })
                             }
                         </div>
                     </div>
-                    <aside className={`col-span-1`}>
+                    <aside className={`mt-10 lg:mt-0 col-span-1`}>
                         <div>
                             <div className={`bg-ai-gold py-10 px-6`}>
                                 <h3 className={`text-h3 mb-6`}>REQUEST INFORMATION</h3>

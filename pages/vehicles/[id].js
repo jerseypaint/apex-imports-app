@@ -52,7 +52,7 @@ const Vehicle = ({data, globalData}) => {
     return (
         <Layout data={globalData}>
             <main>
-                <PageHeader image={globalData.pageHeader} heading={`${vehicle.year} ${vehicle.make} ${vehicle.model}`} />
+                <PageHeader image={globalData.vehicleHeader} heading={`${vehicle.year} ${vehicle.make} ${vehicle.model}`} />
 
                 <div className={`mb-12`}>
                     <Splide
@@ -87,8 +87,8 @@ const Vehicle = ({data, globalData}) => {
                     </Splide>
                 </div>
 
-                <div className='container gap-6 grid md:grid-cols-3 2xl:grid-cols-4'>
-                    <div className={`col-span-2 2xl:col-span-3`}>
+                <div className='container gap-6 grid lg:grid-cols-3 2xl:grid-cols-4'>
+                    <div className={`lg:col-span-2 2xl:col-span-3`}>
                         <div className={``}>
                             <div className={`border border-white bg-black border-opacity-40 my-12 p-6 first:mt-0 last:mb-0`}>
                                 <div className={`md:flex justify-between items-center`}>
@@ -122,7 +122,7 @@ const Vehicle = ({data, globalData}) => {
                                     {/* register your input into the hook by invoking the "register" function */}
                                     <label className={`mb-4 block`}>
                                         Name
-                                        <span className={`lg:grid grid-cols-2 gap-4`}>
+                                        <span className={`md:grid grid-cols-2 gap-4`}>
                                             <input className={`block w-full bg-white bg-opacity-40 border border-white p-2 placeholder:text-white mt-2`} placeholder={`First`} {...register("firstName")} />
                                             <input className={`block w-full bg-white bg-opacity-40 border border-white p-2 placeholder:text-white mt-2`} placeholder={`Last`} {...register("lastName")} />
                                         </span>
@@ -193,7 +193,7 @@ export async function getStaticPaths() {
             text,
             "page": pageLink->slug.current
         },
-        "pageHeader": pageHeader.asset->url
+        "vehicleHeader": vehicleHeader.asset->url
     }`)
     return {
       props: {

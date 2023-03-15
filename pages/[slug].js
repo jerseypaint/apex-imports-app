@@ -9,12 +9,24 @@ import { Layout } from '../components/Layout'
 
 const Page = ({pageData, inventoryData, globalData}) => {
   
-    const template = pageData.template
+    const template      = pageData.template
+    const headerObject  = {
+      heading: pageData.title,
+      image: globalData.pageHeader
+    }
+
+    console.log(pageData.header)
+
+    if (pageData.header) {
+      headerObject.heading  = pageData.header.titleOverride ? pageData.header.titleOverride : headerObject.heading,
+      headerObject.image    = pageData.header.backgroundImage ? pageData.header.backgroundImage : headerObject.image
+    }
     
     return (
         <Layout data={globalData}>
             <main>
-                <PageHeader heading={pageData.title} image={globalData.pageHeader} />
+                
+                <PageHeader heading={headerObject.heading} image={headerObject.image} />
 
                 {template === `inventoryIndex` && <Inventory vehicles={inventoryData} />}
                 {template === `services` && <Services cards={pageData.contentCards} />}
@@ -25,12 +37,7 @@ const Page = ({pageData, inventoryData, globalData}) => {
                 }
                 
             </main>
-            <aside>
-                <div>
-                    {/* form */}
-                </div>
-            </aside>
-            
+
         </Layout>
     )
   }
@@ -64,8 +71,14 @@ export async function getStaticPaths() {
     }
     `)
     const pageData = await client.fetch(`*[_type == "page" && slug.current == $slug][0]{
-      _id, header, title, template,
-      contentCards,
+      _id, title, template,
+      contentCards[]{
+        type, heading, body, list,
+        "media": media {
+          type, ytEmbedUrl,
+          "image": image.asset->url
+        }
+      },
       footerLinkBoxes[]->{
         "globalLinkBox": {
           "heading": globalLinkBox.heading,
@@ -74,6 +87,10 @@ export async function getStaticPaths() {
           "backgroundImage": globalLinkBox.backgroundImage.asset->url
         }
       },
+      "header": header[0]{
+        titleOverride,
+        "backgroundImage": backgroundImage.asset->url
+      }
     }`, { slug })
     const inventoryData = await client.fetch(`*[_type == "vehicle"]{
       _id, year, make, model, price, mileage, engine, drivetrain, exterior_color, interior_color, transmission,

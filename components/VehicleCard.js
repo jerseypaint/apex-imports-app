@@ -3,17 +3,21 @@ import Image from 'next/image';
 import { Splide, SplideTrack, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/splide/dist/css/splide-core.min.css';
 import Link from 'next/link';
-import { useInView } from "framer-motion"
+import { motion } from "framer-motion";
 
 import { ArrowRight, ChevronLeft, ChevronRight } from './svg';
 import { money } from '../lib/format';
 
 const VehicleCard = ({vehicle}) => {
-    const ref = useRef(null)
-    const isInView = useInView(ref, { once: true })
 
     return (
-        <div ref={ref} className={`border border-white bg-black border-opacity-40 lg:flex my-12 first:mt-0 last:mb-0 opacity-0 transition-opacity duration-300 ${isInView && `opacity-100`}`}>
+        <motion.div
+            className={`border border-white bg-black border-opacity-40 lg:flex my-12 first:mt-0 last:mb-0transition-opacity duration-300`}
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1.5 }}
+        >
             <div className={`flex flex-col w-full flex-1 lg:max-w-[40%]`}>
                 <Splide
                 options={ {
@@ -62,7 +66,7 @@ const VehicleCard = ({vehicle}) => {
                     <Link className={`button flex justify-end items-center gap-4`} href={`/vehicles/${vehicle._id}`}>Learn More<ArrowRight /></Link>
                 </div>
             </div>
-        </div>
+        </motion.div>
     )
 }
 
