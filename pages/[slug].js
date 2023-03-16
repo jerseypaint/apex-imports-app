@@ -47,7 +47,7 @@ export async function getStaticPaths() {
   
     return {
       paths: paths.map((slug) => ({params: {slug}})),
-      fallback: true,
+      fallback: false,
     }
   }
 
@@ -89,7 +89,7 @@ export async function getStaticPaths() {
         "backgroundImage": backgroundImage.asset->url
       }
     }`, { slug })
-    
+
     const inventoryData = await client.fetch(`*[_type == "vehicle"]{
       _id, year, make, model, price, mileage, engine, drivetrain, exterior_color, interior_color, transmission,
       "images": images[].asset->url
