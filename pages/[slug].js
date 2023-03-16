@@ -11,8 +11,8 @@ const Page = ({pageData, inventoryData, globalData}) => {
   
     const template      = globalData && pageData.template !== undefined ? pageData.template : false
     const headerObject  = {
-      heading: pageData.title,
-      image: globalData.pageHeader
+      heading: pageData && pageData.title ? pageData.title : false,
+      image:  globalData && globalData.pageHeader ? globalData.pageHeader : false
     }
 
     if (pageData.header) {
@@ -44,8 +44,6 @@ export async function getStaticPaths() {
     const paths = await client.fetch(
         `*[_type == "page" && defined(slug.current)][].slug.current`
     )
-
-    console.log(paths)
   
     return {
       paths: paths.map((slug) => ({params: {slug}})),
@@ -68,6 +66,7 @@ export async function getStaticPaths() {
       "pageHeader": pageHeader.asset->url
     }
     `)
+
     const pageData = await client.fetch(`*[_type == "page" && slug.current == $slug][0]{
       _id, title, template,
       contentCards[]{
@@ -90,6 +89,7 @@ export async function getStaticPaths() {
         "backgroundImage": backgroundImage.asset->url
       }
     }`, { slug })
+    
     const inventoryData = await client.fetch(`*[_type == "vehicle"]{
       _id, year, make, model, price, mileage, engine, drivetrain, exterior_color, interior_color, transmission,
       "images": images[].asset->url
