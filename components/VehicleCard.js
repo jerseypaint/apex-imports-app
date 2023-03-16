@@ -61,8 +61,8 @@ const VehicleCard = ({vehicle}) => {
                         <li className={`text-p`}><span className={`font-bold block md:inline`}>Interior Color: </span>{vehicle.interior_color}</li>
                     </ul>
                 </div>
-                <div className={`p-6 border-t border-white border-opacity-40 md:flex items-center justify-between`}>
-                    <p className={`text-h2`}>{money(vehicle.price)}</p>
+                <div className={`p-6 border-t border-white border-opacity-40 flex gap-6 flex-col md:flex-row items-center justify-between`}>
+                    <p className={`text-3xl md:text-4xl`}>{money(vehicle.price)}</p>
                     <Link className={`button flex justify-end items-center gap-4`} href={`/vehicles/${vehicle._id}`}>Learn More<ArrowRight /></Link>
                 </div>
             </div>
